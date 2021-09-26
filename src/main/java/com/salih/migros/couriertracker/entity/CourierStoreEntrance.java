@@ -16,6 +16,17 @@ public class CourierStoreEntrance {
     private String storeName;
     private Date transactionDate;
 
+    public CourierStoreEntrance() {
+        super();
+    }
+
+    public CourierStoreEntrance(Long courierId, String storeName, Date transactionDate) {
+        super();
+        this.courierId = courierId;
+        this.storeName = storeName;
+        this.transactionDate = transactionDate;
+    }
+
     public Long getId() {
         return id;
     }

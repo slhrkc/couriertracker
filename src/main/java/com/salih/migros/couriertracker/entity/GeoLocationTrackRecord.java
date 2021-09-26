@@ -19,6 +19,18 @@ public class GeoLocationTrackRecord implements IGeoLocation {
     private double lat;
     private double lon;
 
+    public GeoLocationTrackRecord() {
+        super();
+    }
+
+    public GeoLocationTrackRecord(Long courierId, Date transactionDate, double lat, double lon) {
+        super();
+        this.courierId = courierId;
+        this.transactionDate = transactionDate;
+        this.lat = lat;
+        this.lon = lon;
+    }
+
     public Long getCourierId() {
         return courierId;
     }

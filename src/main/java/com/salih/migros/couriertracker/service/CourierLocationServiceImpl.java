@@ -5,8 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.salih.migros.couriertracker.CourierStoreEntraceRepository;
 import com.salih.migros.couriertracker.GeoLocationTrackRecordRepository;
 import com.salih.migros.couriertracker.entity.CourierStoreEntrance;
-import com.salih.migros.couriertracker.model.Courier;
 import com.salih.migros.couriertracker.entity.GeoLocationTrackRecord;
+import com.salih.migros.couriertracker.model.Courier;
 import com.salih.migros.couriertracker.model.Store;
 import com.salih.migros.couriertracker.util.GeoLocationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.PostConstruct;
-import javax.persistence.EntityManager;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -33,9 +32,6 @@ public class  CourierLocationServiceImpl implements CourierLocationService{
     @Autowired
     @Value("classpath:stores.json")
     private Resource resourceFile;
-
-    @Autowired
-    private EntityManager entityManager;
 
     @Autowired
     private CourierStoreEntraceRepository courierStoreEntraceRepository;
@@ -73,17 +69,10 @@ public class  CourierLocationServiceImpl implements CourierLocationService{
             throw new Exception("Transaction Date cannot be null!");
         }
 
-        // save the geolocation
-        GeoLocationTrackRecord record = new GeoLocationTrackRecord();
-        record.setLat(lat);
-        record.setLon(lon);
-        record.setTransactionDate(transactionDate);
-        record.setCourierId(courier.getCourierId());
-        saveTrackRecord(record);
-        // check if 100 meters
+        GeoLocationTrackRecord record = new GeoLocationTrackRecord(courier.getCourierId(),transactionDate,lat,lon);
+        geoLocationTrackRecordRepository.save(record);
+
         logCarrierStoreEntrance(courier.getCourierId(),lat,lon,transactionDate);
-
-
     }
 
     @Override
@@ -105,10 +94,7 @@ public class  CourierLocationServiceImpl implements CourierLocationService{
         for (Store store:stores) {
             if (GeoLocationUtil.distance(lat,lon,store.getLat(),store.getLng()) <= DISTANCE_TO_STORE_TO_LOG
                     && !hasCourierEntrance(courierId,store,oneMinRange.getTime())) {
-                CourierStoreEntrance entrance = new CourierStoreEntrance();
-                entrance.setCourierId(courierId);
-                entrance.setStoreName(store.getName());
-                entrance.setTransactionDate(transactionDate);
+                CourierStoreEntrance entrance = new CourierStoreEntrance(courierId,store.getName(),transactionDate);
                 courierStoreEntraceRepository.save(entrance);
             }
         }
@@ -120,9 +106,5 @@ public class  CourierLocationServiceImpl implements CourierLocationService{
             return false;
         }
         return true;
-    }
-
-    private void saveTrackRecord(GeoLocationTrackRecord entity){
-        entityManager.persist(entity);
     }
 }
