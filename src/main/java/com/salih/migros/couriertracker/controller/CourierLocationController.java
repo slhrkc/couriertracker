@@ -1,6 +1,7 @@
 package com.salih.migros.couriertracker.controller;
 
 import com.salih.migros.couriertracker.entity.CourierStoreEntrance;
+import com.salih.migros.couriertracker.model.GetDistanceTravelledResponse;
 import com.salih.migros.couriertracker.model.SaveGeoLocationRequest;
 import com.salih.migros.couriertracker.service.CourierLocationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,14 +16,15 @@ public class CourierLocationController {
     CourierLocationService courierLocationService;
 
     @PostMapping("/")
-    public String save(@RequestBody SaveGeoLocationRequest request) throws Exception {
+    public void save(@RequestBody SaveGeoLocationRequest request) throws Exception {
         courierLocationService.saveCourierLocation(request.getCourier(),request.getLat(),request.getLon(),request.getTransactionTime());
-        return null;
     }
 
     @GetMapping("/travelledDistance")
-    public String getdistanceTravelled(@RequestParam Long courierId){
-        return courierLocationService.getTotalTravelDistance(courierId).toString();
+    public GetDistanceTravelledResponse getdistanceTravelled(@RequestParam Long courierId){
+        GetDistanceTravelledResponse response = new GetDistanceTravelledResponse();
+        response.setTotalDistance(courierLocationService.getTotalTravelDistance(courierId));
+        return response;
     }
 
     @GetMapping("/storeEntrances")
