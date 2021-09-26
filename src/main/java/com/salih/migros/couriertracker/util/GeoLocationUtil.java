@@ -1,6 +1,5 @@
 package com.salih.migros.couriertracker.util;
 
-import com.salih.migros.couriertracker.model.GeoLocation;
 import com.salih.migros.couriertracker.model.IGeoLocation;
 
 import java.util.List;

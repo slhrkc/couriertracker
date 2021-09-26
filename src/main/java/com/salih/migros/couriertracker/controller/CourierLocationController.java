@@ -12,9 +12,14 @@ public class CourierLocationController {
     CourierLocationService courierLocationService;
 
     @PostMapping("/")
-    public String index(@RequestBody SaveGeoLocationRequest request) throws Exception {
+    public String save(@RequestBody SaveGeoLocationRequest request) throws Exception {
         courierLocationService.saveCourierLocation(request.getCourier(),request.getLat(),request.getLon(),request.getTransactionTime());
         return null;
+    }
+
+    @GetMapping("/distanceTravelled")
+    public String getdistanceTravelled(@RequestParam Long courierId){
+        return courierLocationService.getTotalTravelDistance(courierId).toString();
     }
 
 }

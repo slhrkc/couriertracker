@@ -2,6 +2,8 @@ package com.salih.migros.couriertracker.service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.salih.migros.couriertracker.CourierStoreEntraceRepository;
+import com.salih.migros.couriertracker.GeoLocationTrackRecordRepository;
 import com.salih.migros.couriertracker.entity.CourierStoreEntrance;
 import com.salih.migros.couriertracker.model.Courier;
 import com.salih.migros.couriertracker.entity.GeoLocationTrackRecord;
@@ -12,6 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
@@ -33,6 +36,12 @@ public class  CourierLocationServiceImpl implements CourierLocationService{
 
     @Autowired
     private EntityManager entityManager;
+
+    @Autowired
+    private CourierStoreEntraceRepository courierStoreEntraceRepository;
+
+    @Autowired
+    private GeoLocationTrackRecordRepository geoLocationTrackRecordRepository;
 
     private List<Store> stores = new ArrayList<>();
 
@@ -79,9 +88,7 @@ public class  CourierLocationServiceImpl implements CourierLocationService{
 
     @Override
     public Double getTotalTravelDistance(Long courierId) {
-        List<GeoLocationTrackRecord> courierRecords = new ArrayList<>();
-        // TODO fetch from DB
-
+        List<GeoLocationTrackRecord> courierRecords = geoLocationTrackRecordRepository.findByCourierIdDateOrderedAsc(courierId);
         return GeoLocationUtil.totalDistance(courierRecords);
     }
 
@@ -97,22 +104,20 @@ public class  CourierLocationServiceImpl implements CourierLocationService{
                 entrance.setCourierId(courierId);
                 entrance.setStoreName(store.getName());
                 entrance.setTransactionDate(transactionDate);
-                saveStoreEntrance(entrance);
+                courierStoreEntraceRepository.save(entrance);
             }
         }
     }
 
     private boolean hasCourierEntrance(Long courierId, Store store, Date timeRange){
-        // TODO implement this
-        return false;
+        List<CourierStoreEntrance> entrances = courierStoreEntraceRepository.findByCourierAndStoreNameAndTimeRange(courierId,store.getName(),timeRange);
+        if (CollectionUtils.isEmpty(entrances)){
+            return false;
+        }
+        return true;
     }
 
     private void saveTrackRecord(GeoLocationTrackRecord entity){
         entityManager.persist(entity);
     }
-
-    private void saveStoreEntrance(CourierStoreEntrance entity){
-        entityManager.persist(entity);
-    }
-
 }
