@@ -2,6 +2,7 @@ package com.salih.migros.couriertracker.service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.salih.migros.couriertracker.exception.BadRequestException;
 import com.salih.migros.couriertracker.repository.CourierStoreEntraceRepository;
 import com.salih.migros.couriertracker.repository.GeoLocationTrackRecordRepository;
 import com.salih.migros.couriertracker.entity.CourierStoreEntrance;
@@ -12,6 +13,7 @@ import com.salih.migros.couriertracker.util.GeoLocationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
@@ -57,16 +59,16 @@ public class  CourierLocationServiceImpl implements CourierLocationService{
     public void saveCourierLocation(Courier courier, double lat, double lon,Date transactionDate) throws Exception {
 
         if (courier == null){
-            throw new Exception("Courier cannot be null!");
+            throw new BadRequestException("Courier cannot be null!");
         }
         if (courier.getCourierId() == null){
-            throw new Exception("Courier ID cannot be null!");
+            throw new BadRequestException("Courier ID cannot be null!");
         }
         if (!GeoLocationUtil.isLocationValid(lat,lon)){
-            throw new Exception("Invalid geolocation!");
+            throw new BadRequestException("Invalid geolocation!");
         }
         if (transactionDate == null){
-            throw new Exception("Transaction Date cannot be null!");
+            throw new BadRequestException("Transaction Date cannot be null!");
         }
 
         GeoLocationTrackRecord record = new GeoLocationTrackRecord(courier.getCourierId(),transactionDate,lat,lon);
