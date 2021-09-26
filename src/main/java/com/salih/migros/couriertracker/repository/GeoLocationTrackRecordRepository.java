@@ -1,4 +1,4 @@
-package com.salih.migros.couriertracker;
+package com.salih.migros.couriertracker.repository;
 
 import com.salih.migros.couriertracker.entity.GeoLocationTrackRecord;
 import org.springframework.data.repository.CrudRepository;

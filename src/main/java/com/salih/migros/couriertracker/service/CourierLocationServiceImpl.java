@@ -2,8 +2,8 @@ package com.salih.migros.couriertracker.service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.salih.migros.couriertracker.CourierStoreEntraceRepository;
-import com.salih.migros.couriertracker.GeoLocationTrackRecordRepository;
+import com.salih.migros.couriertracker.repository.CourierStoreEntraceRepository;
+import com.salih.migros.couriertracker.repository.GeoLocationTrackRecordRepository;
 import com.salih.migros.couriertracker.entity.CourierStoreEntrance;
 import com.salih.migros.couriertracker.entity.GeoLocationTrackRecord;
 import com.salih.migros.couriertracker.model.Courier;
