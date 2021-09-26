@@ -92,6 +92,11 @@ public class  CourierLocationServiceImpl implements CourierLocationService{
         return GeoLocationUtil.totalDistance(courierRecords);
     }
 
+    @Override
+    public List<CourierStoreEntrance> getStoreEntrances(Long courierId) {
+        return courierStoreEntraceRepository.findByCourierIdOrderByTransactionDateDesc(courierId);
+    }
+
     private void logCarrierStoreEntrance(Long courierId, double lat, double lon,Date transactionDate){
         Calendar oneMinRange = Calendar.getInstance();
         oneMinRange.setTime(transactionDate);
