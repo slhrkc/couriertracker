@@ -14,17 +14,6 @@ public class GeoLocationUtil {
         return instance;
     }
 
-    /**
-     * Calculate distance between two points in latitude and longitude taking
-     * into account height difference. If you are not interested in height
-     * difference pass 0.0. Uses Haversine method as its base.
-     *
-     * lat1, lon1 Start point lat2, lon2 End point el1 Start altitude in meters
-     * el2 End altitude in meters
-     * @returns Distance in Meters
-     */
-
-
     public  double distance(double lat1, double lon1, double lat2,double lon2) {
 
         final int EARTH_RADIUS_IN_METERS = 6371 * 1000;
@@ -55,12 +44,6 @@ public class GeoLocationUtil {
         return totalDistance;
     }
 
-    /**
-     * The latitude must be a number between -90 and 90 and the longitude between -180 and 180.
-     * @param lat
-     * @param lon
-     * @return
-     */
     public  boolean isLocationValid(double lat, double lon){
         if ((lon > -180 && lon < 180) && (lat > -90 && lat < 90)) {
             return true;
