@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
@@ -24,8 +25,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-@Repository
-@Transactional // TODO gerek var mı kontrol et
+@Service
+@Transactional
 public class  CourierLocationServiceImpl implements CourierLocationService{
     @Autowired
     private ObjectMapper objectMapper;
