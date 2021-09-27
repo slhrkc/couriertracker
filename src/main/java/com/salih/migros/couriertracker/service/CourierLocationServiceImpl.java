@@ -63,7 +63,7 @@ public class  CourierLocationServiceImpl implements CourierLocationService{
         if (courier.getCourierId() == null){
             throw new BadRequestException("Courier ID cannot be null!");
         }
-        if (!GeoLocationUtil.isLocationValid(lat,lon)){
+        if (!GeoLocationUtil.getInstance().isLocationValid(lat,lon)){
             throw new BadRequestException("Invalid geolocation!");
         }
         if (transactionDate == null){
@@ -79,7 +79,7 @@ public class  CourierLocationServiceImpl implements CourierLocationService{
     @Override
     public Double getTotalTravelDistance(Long courierId) {
         List<GeoLocationTrackRecord> courierRecords = geoLocationTrackRecordRepository.findByCourierIdDateOrderedAsc(courierId);
-        return GeoLocationUtil.totalDistance(courierRecords);
+        return GeoLocationUtil.getInstance().totalDistance(courierRecords);
     }
 
     @Override
@@ -93,7 +93,7 @@ public class  CourierLocationServiceImpl implements CourierLocationService{
         oneMinRange.add(Calendar.MINUTE,-1 * ENTRANCE_INVALID_TIME_RANGE);
 
         for (Store store:stores) {
-            if (GeoLocationUtil.distance(lat,lon,store.getLat(),store.getLng()) <= DISTANCE_TO_STORE_TO_LOG
+            if (GeoLocationUtil.getInstance().distance(lat,lon,store.getLat(),store.getLng()) <= DISTANCE_TO_STORE_TO_LOG
                     && !hasCourierEntrance(courierId,store,oneMinRange.getTime())) {
                 CourierStoreEntrance entrance = new CourierStoreEntrance(courierId,store.getName(),transactionDate);
                 courierStoreEntraceRepository.save(entrance);

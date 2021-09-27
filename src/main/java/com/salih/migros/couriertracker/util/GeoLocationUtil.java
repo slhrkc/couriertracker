@@ -5,6 +5,15 @@ import com.salih.migros.couriertracker.model.IGeoLocation;
 import java.util.List;
 
 public class GeoLocationUtil {
+    private static GeoLocationUtil instance = new GeoLocationUtil();
+
+    private GeoLocationUtil() {
+    }
+
+    public static GeoLocationUtil getInstance(){
+        return instance;
+    }
+
     /**
      * Calculate distance between two points in latitude and longitude taking
      * into account height difference. If you are not interested in height
@@ -14,7 +23,9 @@ public class GeoLocationUtil {
      * el2 End altitude in meters
      * @returns Distance in Meters
      */
-    public static double distance(double lat1, double lon1, double lat2,double lon2) {
+
+
+    public  double distance(double lat1, double lon1, double lat2,double lon2) {
 
         final int EARTH_RADIUS_IN_METERS = 6371 * 1000;
 
@@ -29,7 +40,7 @@ public class GeoLocationUtil {
         return distance;
     }
 
-    public static double totalDistance(List<? extends IGeoLocation> geoLocationList){
+    public  double totalDistance(List<? extends IGeoLocation> geoLocationList){
         double totalDistance = 0.0;
         IGeoLocation currentLocation = null;
 
@@ -50,7 +61,7 @@ public class GeoLocationUtil {
      * @param lon
      * @return
      */
-    public static boolean isLocationValid(double lat, double lon){
+    public  boolean isLocationValid(double lat, double lon){
         if ((lon > -180 && lon < 180) && (lat > -90 && lat < 90)) {
             return true;
         }
