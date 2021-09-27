@@ -25,7 +25,7 @@ import java.util.Date;
 import java.util.List;
 
 @Repository
-@Transactional
+@Transactional // TODO gerek var mı kontrol et
 public class  CourierLocationServiceImpl implements CourierLocationService{
     @Autowired
     private ObjectMapper objectMapper;
