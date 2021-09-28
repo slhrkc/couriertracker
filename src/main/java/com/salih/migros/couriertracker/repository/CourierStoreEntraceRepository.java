@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 public interface CourierStoreEntraceRepository extends CrudRepository<CourierStoreEntrance, Integer> {
-    List<CourierStoreEntrance> findByCourierAndStoreNameAndTimeRange(@Param("courierId")Long courierId, @Param("storeName") String storeName,@Param("transactionDate") Date transactionDate);
+    List<CourierStoreEntrance> findByCourierAndStoreNameAndTimeRange(@Param("courierId") Long courierId, @Param("storeName") String storeName,@Param("startTime") Date startTime, @Param("endTime") Date endTime);
     List<CourierStoreEntrance> findByCourierIdOrderByTransactionDateDesc(@Param("courierId")Long courierId);
 
 }

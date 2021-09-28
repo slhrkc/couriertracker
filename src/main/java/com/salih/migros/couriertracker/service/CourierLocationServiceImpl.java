@@ -88,21 +88,25 @@ public class  CourierLocationServiceImpl implements CourierLocationService{
     }
 
     private void logCarrierStoreEntrance(Long courierId, double lat, double lon,Date transactionDate){
-        Calendar oneMinRange = Calendar.getInstance();
-        oneMinRange.setTime(transactionDate);
-        oneMinRange.add(Calendar.MINUTE,-1 * ENTRANCE_INVALID_TIME_RANGE);
+        Calendar startTime = Calendar.getInstance();
+        startTime.setTime(transactionDate);
+        startTime.add(Calendar.MINUTE,-1 * ENTRANCE_INVALID_TIME_RANGE);
+
+        Calendar endTime = Calendar.getInstance();
+        endTime.setTime(transactionDate);
+        endTime.add(Calendar.MINUTE, ENTRANCE_INVALID_TIME_RANGE);
 
         for (Store store:stores) {
             if (GeoLocationUtil.getInstance().distance(lat,lon,store.getLat(),store.getLng()) <= DISTANCE_TO_STORE_TO_LOG
-                    && !hasCourierEntrance(courierId,store,oneMinRange.getTime())) {
+                    && !hasCourierEntrance(courierId,store,startTime.getTime(),endTime.getTime() )) {
                 CourierStoreEntrance entrance = new CourierStoreEntrance(courierId,store.getName(),transactionDate);
                 courierStoreEntraceRepository.save(entrance);
             }
         }
     }
 
-    private boolean hasCourierEntrance(Long courierId, Store store, Date timeRange){
-        List<CourierStoreEntrance> entrances = courierStoreEntraceRepository.findByCourierAndStoreNameAndTimeRange(courierId,store.getName(),timeRange);
+    private boolean hasCourierEntrance(Long courierId, Store store, Date startTime,Date endTime){
+        List<CourierStoreEntrance> entrances = courierStoreEntraceRepository.findByCourierAndStoreNameAndTimeRange(courierId,store.getName(),startTime,endTime);
         if (CollectionUtils.isEmpty(entrances)){
             return false;
         }

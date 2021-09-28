@@ -7,7 +7,7 @@ import javax.persistence.NamedQuery;
 import java.util.Date;
 
 @Entity
-@NamedQuery(name = "CourierStoreEntrance.findByCourierAndStoreNameAndTimeRange", query = "from CourierStoreEntrance where storeName = :storeName and courierId = :courierId and transactionDate >= :transactionDate order by transactionDate desc")
+@NamedQuery(name = "CourierStoreEntrance.findByCourierAndStoreNameAndTimeRange", query = "from CourierStoreEntrance where storeName = :storeName and courierId = :courierId and transactionDate >= :startTime and transactionDate <= :endTime order by transactionDate desc")
 public class CourierStoreEntrance {
     @Id
     @GeneratedValue
