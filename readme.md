@@ -10,3 +10,9 @@ It will be loaded on http://localhost:8080/courier/
 
 To test the API, you can use below url.
 http://localhost:8080/courier//swagger-ui.html#/
+
+
+Two Design Patterns are used.
+
+- Facade Pattern on  CourierLocationServiceImpl class
+- Singleton Pattern on GeoLocationUtil class
