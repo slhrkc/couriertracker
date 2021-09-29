@@ -17,7 +17,7 @@ public class CourierLocationController {
 
     @PostMapping("/")
     public void save(@RequestBody SaveGeoLocationRequest request) throws Exception {
-        courierLocationService.saveCourierLocation(request.getCourier(),request.getLat(),request.getLon(),request.getTransactionTime());
+        courierLocationService.saveCourierLocation(request.getCourier(),request.getLat(),request.getLng(),request.getTime());
     }
 
     @GetMapping("/travelledDistance")

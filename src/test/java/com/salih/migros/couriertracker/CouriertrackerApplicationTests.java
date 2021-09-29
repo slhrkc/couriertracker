@@ -31,8 +31,8 @@ class CouriertrackerApplicationTests {
 								"        \"courierId\":1\n" +
 								"    },\n" +
 								"    \"lat\":  40.9923307,\n" +
-								"    \"lon\":  29.1244229,\n" +
-								"    \"transactionTime\":\"2021-09-27T18:54:08.125\"\n" +
+								"    \"lng\":  29.1244229,\n" +
+								"    \"time\":\"2021-09-27T18:54:08.125\"\n" +
 								"}"))
 				.andExpect(status().isOk());
 
@@ -43,8 +43,8 @@ class CouriertrackerApplicationTests {
 								"        \"courierId\":1\n" +
 								"    },\n" +
 								"    \"lat\":  400.9923307,\n" +
-								"    \"lon\":  29.1244229,\n" +
-								"    \"transactionTime\":\"2021-09-27T18:54:08.125\"\n" +
+								"    \"lng\":  29.1244229,\n" +
+								"    \"time\":\"2021-09-27T18:54:08.125\"\n" +
 								"}"))
 				.andExpect(status().isBadRequest());
 
@@ -54,8 +54,8 @@ class CouriertrackerApplicationTests {
 								"    \"courier\":{\n" +
 								"    },\n" +
 								"    \"lat\":  40.9923307,\n" +
-								"    \"lon\":  29.1244229,\n" +
-								"    \"transactionTime\":\"2021-09-27T18:54:08.125\"\n" +
+								"    \"lng\":  29.1244229,\n" +
+								"    \"time\":\"2021-09-27T18:54:08.125\"\n" +
 								"}"))
 				.andExpect(status().isBadRequest());
 
@@ -65,8 +65,8 @@ class CouriertrackerApplicationTests {
 								"    \"courier\":{\n" +
 								"    },\n" +
 								"    \"lat\":  40.9923307,\n" +
-								"    \"lon\":  29.1244229,\n" +
-								"    \"transactionTime\":\"2021-09-27T18:54:08.125\"\n" +
+								"    \"lng\":  29.1244229,\n" +
+								"    \"time\":\"2021-09-27T18:54:08.125\"\n" +
 								"}"))
 				.andExpect(status().isBadRequest());
 	}
@@ -80,8 +80,8 @@ class CouriertrackerApplicationTests {
 								"        \"courierId\":1\n" +
 								"    },\n" +
 								"    \"lat\":  40.9923307,\n" +
-								"    \"lon\":  29.1244229,\n" +
-								"    \"transactionTime\":\"2021-09-27T18:54:08.125\"\n" +
+								"    \"lng\":  29.1244229,\n" +
+								"    \"time\":\"2021-09-27T18:54:08.125\"\n" +
 								"}"))
 				.andExpect(status().isOk());
 		mockMvc.perform(post("/courierLocation/")
@@ -91,8 +91,8 @@ class CouriertrackerApplicationTests {
 								"        \"courierId\":1\n" +
 								"    },\n" +
 								"    \"lat\":  40.9923307,\n" +
-								"    \"lon\":  29.2244229,\n" +
-								"    \"transactionTime\":\"2021-09-27T18:55:08.125\"\n" +
+								"    \"lng\":  29.2244229,\n" +
+								"    \"time\":\"2021-09-27T18:55:08.125\"\n" +
 								"}"))
 				.andExpect(status().isOk());
 		mockMvc.perform(post("/courierLocation/")
@@ -102,8 +102,8 @@ class CouriertrackerApplicationTests {
 								"        \"courierId\":1\n" +
 								"    },\n" +
 								"    \"lat\":  40.9923307,\n" +
-								"    \"lon\":  29.2254229,\n" +
-								"    \"transactionTime\":\"2021-09-27T18:55:08.125\"\n" +
+								"    \"lng\":  29.2254229,\n" +
+								"    \"time\":\"2021-09-27T18:55:08.125\"\n" +
 								"}"))
 				.andExpect(status().isOk());
 
@@ -122,8 +122,8 @@ class CouriertrackerApplicationTests {
 								"        \"courierId\":1\n" +
 								"    },\n" +
 								"    \"lat\":  41.0066851,\n" +
-								"    \"lon\":  28.6552262,\n" +
-								"    \"transactionTime\":\"2021-09-27T18:54:08.125\"\n" +
+								"    \"lng\":  28.6552262,\n" +
+								"    \"time\":\"2021-09-27T18:54:08.125\"\n" +
 								"}"))
 				.andExpect(status().isOk());
 		mockMvc.perform(post("/courierLocation/")
@@ -133,8 +133,8 @@ class CouriertrackerApplicationTests {
 								"        \"courierId\":1\n" +
 								"    },\n" +
 								"    \"lat\":  41.0066851,\n" +
-								"    \"lon\":  28.6552262,\n" +
-								"    \"transactionTime\":\"2021-09-27T18:56:08.125\"\n" +
+								"    \"lng\":  28.6552262,\n" +
+								"    \"time\":\"2021-09-27T18:56:08.125\"\n" +
 								"}"))
 				.andExpect(status().isOk());
 		mockMvc.perform(post("/courierLocation/")
@@ -144,8 +144,8 @@ class CouriertrackerApplicationTests {
 								"        \"courierId\":1\n" +
 								"    },\n" +
 								"    \"lat\":  41.0066851,\n" +
-								"    \"lon\":  28.6552262,\n" +
-								"    \"transactionTime\":\"2021-09-27T18:56:48.125\"\n" +
+								"    \"lng\":  28.6552262,\n" +
+								"    \"time\":\"2021-09-27T18:56:48.125\"\n" +
 								"}"))
 				.andExpect(status().isOk());
 

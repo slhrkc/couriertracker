@@ -5,8 +5,8 @@ import java.util.Date;
 public class SaveGeoLocationRequest {
     private Courier courier;
     private double lat;
-    private double lon;
-    private Date transactionTime;
+    private double lng;
+    private Date time;
 
     public Courier getCourier() {
         return courier;
@@ -24,19 +24,19 @@ public class SaveGeoLocationRequest {
         this.lat = lat;
     }
 
-    public double getLon() {
-        return lon;
+    public double getLng() {
+        return lng;
     }
 
-    public void setLon(double lon) {
-        this.lon = lon;
+    public void setLng(double lng) {
+        this.lng = lng;
     }
 
-    public Date getTransactionTime() {
-        return transactionTime;
+    public Date getTime() {
+        return time;
     }
 
-    public void setTransactionTime(Date transactionTime) {
-        this.transactionTime = transactionTime;
+    public void setTime(Date time) {
+        this.time = time;
     }
 }
